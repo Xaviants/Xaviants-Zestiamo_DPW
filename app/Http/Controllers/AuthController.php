@@ -35,4 +35,8 @@ class AuthController extends Controller
             return redirect()->back()->with('failed', 'Email or Password are incorrect!');
         }
     }
+
+    function showFP() {
+        return view('auth.forgotPassword');
+    }
 }

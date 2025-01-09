@@ -14,7 +14,7 @@ Route::post('/register/submit', [AuthController::class, 'submitRegister'])->name
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
 Route::post('/login/submit', [AuthController::class, 'submitLogin'])->name('login.submit');
 
-Route::get('/forgotPassword', [RestoController::class, 'showFP'])->name('password.reset');
+Route::get('/forgotPassword', [AuthController::class, 'showFP'])->name('password.reset');
 
 Route::get('/contact', [RestoController::class], 'showContact')->name('contact.show');
 Route::post('/contact/submit', [RestoController::class, 'submitContact'])->name('contact.submit');

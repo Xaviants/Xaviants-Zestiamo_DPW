@@ -12,8 +12,8 @@ class RestoController extends Controller
         return view('contact');
     }
 
-    function showFP() {
-        return view('auth.forgotPassword');
+    function submitContact(Request $request) {
+        
     }
 
     function showHome() {
