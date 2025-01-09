@@ -46,7 +46,7 @@
             font-weight: bold;
         }
         .btn:hover {
-            background-color: #5E3A12;
+            background-color: #74491A;
             color: #fff;
         }
         .footer {
@@ -83,7 +83,7 @@
                 @foreach($cartItems as $item)
                 <div class="order-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <img src="/images/{{ $item->image ?? 'default.jpg' }}" alt="{{ $item->name }}" style="width: 100px; height: auto; border-radius: 8px; margin-right: 20px;">
+                        <img src="/images/{{ strtolower(str_replace(' ', '_', $item->name)) }}.jpg" alt="{{ $item->name }}" style="width: 100px; height: auto; border-radius: 8px; margin-right: 20px;">
                         <div>
                             <h5>{{ $item->name }}</h5>
                             <p>Rp. {{ number_format($item->price, 0, ',', '.') }}</p>
@@ -120,13 +120,12 @@
                 <textarea id="notes" class="notes" rows="3" placeholder="Leave your notes here ..."></textarea>
             </div>
 
-            <!-- Total and Save -->
+            <!-- Total, Reserve Table, and Save -->
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <div class="total-payment">TOTAL PAYMENT: Rp. {{ number_format($totalPrice, 0, ',', '.') }}</div>
-                <form action="{{ route('resto.saveOrder') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn save-order">SAVE ORDER</button>
-                </form>
+                <div class="total-payment">TOTAL PAYMENT: Rp. {{ number_format($totalPayment, 0, ',', '.') }}</div>
+                <div>
+                    <a href="{{ route('reservations.create') }}" class="btn">Reserve Table</a>
+                </div>
             </div>
         @endif
     </div>

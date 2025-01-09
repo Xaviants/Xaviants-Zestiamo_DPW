@@ -173,10 +173,4 @@ class RestoController extends Controller
         CartMenu::destroy($id);
         return redirect()->back();
     }
-
-    public function saveOrder() {
-        // Simpan order ke tabel orders, atau proses lainnya.
-        CartMenu::truncate(); // Kosongkan cart setelah save
-        return redirect()->route('resto.menu')->with('success', 'Order saved successfully!');
-    }
 }

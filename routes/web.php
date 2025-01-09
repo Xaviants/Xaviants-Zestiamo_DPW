@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RestoController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,6 @@ Route::post('/add-to-cart', [RestoController::class, 'addToCart'])->name('resto.
 Route::get('/view-order', [RestoController::class, 'viewOrder'])->name('resto.viewOrder');
 Route::post('/cart/update-quantity/{id}', [RestoController::class, 'updateQuantity'])->name('resto.updateQuantity');
 Route::post('/remove-from-cart/{id}', [RestoController::class, 'removeFromCart'])->name('resto.removeFromCart');
-Route::post('/save-order', [RestoController::class, 'saveOrder'])->name('resto.saveOrder');
+
+Route::get('/reserve_table', [ReservationController::class, 'create'])->name('reservations.create');
+Route::post('/reserve_table', [ReservationController::class, 'store'])->name('reservations.store');
