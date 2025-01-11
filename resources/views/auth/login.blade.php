@@ -28,14 +28,6 @@
             z-index: -1;
         }
 
-        .card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-
         h2 {
             font-family: 'Times New Roman', serif;
             font-size: 2rem;
@@ -69,22 +61,11 @@
             color: white;
         }
 
-        .btn-signup {
-            background-color: #2F271E;
-            color: #ffffff;
-            border: 2px solid #333;
-        }
-
-        .btn-signup:hover {
-            background-color: #333;
-            color: white;
-        }
-
         .btn-link {
             background: none;
             border: none;
             padding: 0;
-            color: #2F271E;
+            color: white;
             font-weight: bold;
             font-size: 1rem;
             text-decoration: underline;
@@ -92,8 +73,51 @@
         }
 
         .btn-link:hover {
+            color: #ccc;
+        }
+
+        .form-container {
+            padding: 2rem;
+            background-color: transparent;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
             color: #555;
         }
+
+        .password-wrapper .toggle-password:hover {
+            color: #333;
+        }
+
+        .text-options {
+            text-align: left;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -107,13 +131,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home">Home</a>
+                        <a class="nav-link" href="{{ route('home.show') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu">Menu</a>
+                        <a class="nav-link" href="{{ route('resto.menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact">Contact</a>
+                        <a class="nav-link" href="{{ route('contact.show') }}">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -128,40 +152,43 @@
     <!-- Content -->
     <div class="text-center mt-5 pt-5">
         <h2>LOGIN</h2>
-        
+
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body text-start">
-                        <form action="{{ route('login.submit') }}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <input type="text" id="email" name="email" class="form-control" placeholder="Username">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                            </div>
-
-                            <!-- Updated Buttons -->
-                            <div class="text-left mt-3">
-                                <p>You don't have an account? 
-                                    <button type="button" class="btn-link" onclick="location.href='register'">Sign Up</button>
+                <form action="{{ route('login.submit') }}" method="post" class="form-container">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Username">
+                        <div class="password-wrapper mt-2">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                            <div class="form-check mt-2">
+                                <p>Show Password
+                                    <input type="checkbox" class="form-check-input" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
                                 </p>
-                                <button type="button" class="btn-link" onclick="location.href='forgotPassword'">Forgot Password?</button>
                             </div>
-
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-custom btn-login">Login</button>
-                            </div>
-                        </form>
-
-                        @if (@session('failed')) 
-                            <p class="text-danger mt-3">{{ session('failed') }}</p>
-                        @endif
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Updated Buttons -->
+                    <div class="text-options mt-3">
+                        <p>You don't have an account? 
+                            <button type="button" class="btn-link" onclick="location.href='register'">Sign Up</button>
+                        </p>
+                        <button type="button" class="btn-link" onclick="location.href='forgotPassword'">Forgot Password?</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-custom btn-login">Login</button>
+                    </div>
+                </form>
+
+                @if (@session('failed')) 
+                    <b><p class="text-danger mt-3">{{ session('failed') }}</p></b>
+                @endif
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

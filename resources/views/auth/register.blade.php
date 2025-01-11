@@ -28,14 +28,6 @@
             z-index: -1;
         }
 
-        .card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-
         h2 {
             font-family: 'Times New Roman', serif;
             font-size: 2rem;
@@ -49,27 +41,31 @@
         }
 
         .btn-custom {
-            width: 100%;
+            width: 48%; /* Membuat lebar tombol sama */
             font-size: 1rem;
             padding: 0.5rem;
-            margin: 0.5rem 0;
+            margin: 0.5rem;
             border-radius: 5px;
             font-weight: bold;
             text-transform: uppercase;
+        }
+
+        .btn-register {
             background-color: #2F271E;
             color: white;
             border: none;
         }
 
-        .btn-custom:hover {
+        .btn-register:hover {
             background-color: #555;
+            color: white;
         }
 
         .btn-link {
             background: none;
             border: none;
             padding: 0;
-            color: #2F271E;
+            color: white;
             font-weight: bold;
             font-size: 1rem;
             text-decoration: underline;
@@ -77,8 +73,31 @@
         }
 
         .btn-link:hover {
-            color: #555;
+            color: #ccc;
         }
+
+        .form-container {
+            padding: 2rem;
+            background-color: transparent;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .text-options {
+            text-align: left;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -92,16 +111,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home">Home</a>
+                        <a class="nav-link" href="{{ route('home.show') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu">Menu</a>
+                        <a class="nav-link" href="{{ route('resto.menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact">Contact</a>
+                        <a class="nav-link" href="{{ route('contact.show') }}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login">
+                        <a class="nav-link" href="#">
                             <i class="bi bi-person-circle"></i>
                         </a>
                     </li>
@@ -113,38 +132,43 @@
     <!-- Content -->
     <div class="text-center mt-5 pt-5">
         <h2>REGISTER</h2>
-        
+
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body text-start">
-                        <form action="{{ route('register.submit') }}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="name">Username</label>
-                                <input type="text" id="name" name="name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email Address</label>
-                                <input type="text" id="email" name="email" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" class="form-control">
-                            </div>
-                            <div>
-                                <p>Already have an account? 
-                                    <button type="button" class="btn-link" onclick="location.href='/login'">Login</button>
-                                </p>
-                            </div>
-                            <button type="submit" class="btn btn-custom">Register</button>
-                        </form>
+                <form action="{{ route('register.submit') }}" method="post" class="form-container">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Username">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                        <p>Show Password
+                            <input type="checkbox" class="form-check-input" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+                        </p>
+                    </div>
+                    
+                    <!-- Updated Buttons -->
+                    <div class="text-options mt-3">
+                        <p>Already have an account? 
+                            <button type="button" class="btn-link" onclick="location.href='login'">Login</button>
+                        </p>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-custom btn-register">Register</button>
+                    </div>
+                </form>
+
+                @if (@session('failed')) 
+                    <p class="text-danger mt-3">{{ session('failed') }}</p>
+                @endif
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

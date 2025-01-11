@@ -98,9 +98,9 @@
         <div class="container d-flex justify-content-between align-items-center">
             <h1 class="h3">Menu</h1>
             <div class="cart-container">
-                <a href="home">Home</a>
+                <a href="{{ route('home.show') }}">Home</a>
                 <a href="#">Menu</a>
-                <a href="contact">Contact</a>
+                <a href="{{ route('contact.show') }}">Contact</a>
                 <a href="{{ route('resto.viewOrder') }}" class="btn">
                     <span>View Order</span>
                     <span class="badge">{{ $cartCount }}</span>
@@ -137,18 +137,26 @@
         </div>
     </div>
 
+    
     <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <h3>Zestiamo</h3>
-            <p class="info">
-                Italian Cuisine<br>
-                Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan<br>
-                Open Everyday, Monday to Sunday, 11AM Onwards.<br>
-                © 2024 Zestiamo. All Rights Reserved.
-            </p>
+<footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
+        <div style="margin-right: 50px">
+            <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
+            <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
         </div>
-    </footer>
+    
+        <!-- Right section for address and other information -->
+        <div style="display: flex; gap: 70px; font-size: 16px;">
+            <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
+            <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
+            <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

@@ -57,7 +57,7 @@
         }
 
         .navbar {
-            position: sticky;
+            position: sticky;   
             top: 0;
             z-index: 1000;
         }
@@ -186,41 +186,57 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu">Menu</a>
+                        <a class="nav-link" href="{{ route('resto.menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact">Contact</a>
+                        <a class="nav-link" href="{{ route('contact.show') }}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light btn-sm" href="login">Log In</a>
+                        <a class="btn btn-light btn-sm" href="{{ route('login') }}">Log In</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    @if(Auth::check())
+    <div class="text-center">
+        <h3>Benvenuto, {{ Auth::user()->name}}</h3>
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button class="btn btn-danger btn-sm">Logout</button>
+        </form>
+    </div>
+    @endif
+
     <!-- Header Section -->
     <div class="header">
         <div class="overlay"></div>
         <p class="subtitle">Italian Cuisine</p>
-        <h1>Zestíamo</h1>
+        <h1 style="font-family: 'Kaisei Decol', serif; font-weight: 599;">Zestiamo</h1>
         <p>A Zestiamo, crediamo che il cibo italiano sia un'esperienza da vivere. Ogni piatto è preparato con amore e passione per portarti il vero sapore dell'Italia.</p>
         <a href="menu" class="view-menu-btn">View Menu</a>
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <h3>Zestiamo</h3>
-            <p class="info">
-                Italian Cuisine<br>
-                Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan<br>
-                Open Everyday, Monday to Sunday, 11AM Onwards.<br>
-                © 2024 Zestiamo. All Rights Reserved.
-            </p>
+    <footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
+            <div style="margin-right: 50px">
+                <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
+                <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
+            </div>
+        
+            <!-- Right section for address and other information -->
+            <div style="display: flex; gap: 70px; font-size: 16px;">
+                <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
+                <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
+                <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
-
+        
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

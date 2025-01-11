@@ -58,7 +58,7 @@
                 <a href="{{ route('home.show') }}">Home</a>
                 <a href="{{ route('resto.menu') }}">Menu</a>
                 <a href="{{ route('contact.show') }}">Contact</a>
-                <a href="{{ route('login.show') }}" class="btn btn-sm">Log In</a>                               
+                <a href="{{ route('login') }}" class="btn btn-sm">Log In</a>                               
             </div>
         </div>
     </header>
@@ -94,15 +94,25 @@
         </div>
     </div>
 
+  
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-            <p><strong>Zestiamo</strong></p>
-            <p>Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
-            <p>Open Everyday, Monday to Sunday 11AM Onwards.</p>
-            <p>&copy; 2024 Zestiamo. All Rights Reserved.</p>
+<footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
+        <div style="margin-right: 50px">
+            <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
+            <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
         </div>
-    </footer>
+    
+        <!-- Right section for address and other information -->
+        <div style="display: flex; gap: 70px; font-size: 16px;">
+            <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
+            <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
+            <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

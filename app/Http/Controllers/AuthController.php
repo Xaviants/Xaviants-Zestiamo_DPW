@@ -18,7 +18,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        return redirect()->route('login.show');
+        return redirect()->route('login');
     }
 
     function showLogin() {
@@ -26,14 +26,19 @@ class AuthController extends Controller
     }
 
     function submitLogin(Request $request) {
-        $data = $request->only('email', 'password');
+        $data = $request->only('name', 'password');
         
         if(Auth::attempt($data)) {
             $request->session()->regenerate();
             return redirect()->route('home.show');
         } else {
-            return redirect()->back()->with('failed', 'Email or Password are incorrect!');
+            return redirect()->back()->with('failed', 'Username or Password are incorrect!');
         }
+    }
+
+    function logout() {
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     function showFP() {

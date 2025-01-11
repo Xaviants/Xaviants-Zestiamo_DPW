@@ -92,16 +92,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home">Home</a>
+                        <a class="nav-link" href="{{ route('home.show') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu">Menu</a>
+                        <a class="nav-link" href="{{ route('resto.menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact">Contact</a>
+                        <a class="nav-link" href="{{ route('contact.show') }}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login">
+                        <a class="nav-link" href="{{ route('login') }}">
                             <i class="bi bi-person-circle"></i>
                         </a>
                     </li>
