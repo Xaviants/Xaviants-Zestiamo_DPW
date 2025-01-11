@@ -124,7 +124,14 @@
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <div class="total-payment">TOTAL PAYMENT: Rp. {{ number_format($totalPayment, 0, ',', '.') }}</div>
                 <div>
-                    <a href="{{ route('reservations.create') }}" class="btn">Reserve Table</a>
+                     <!-- Reserve Table -->
+                    <form action="{{ route('reservations.create') }}" method="GET" class="d-inline">
+                        <button type="submit" class="btn">Reserve Table</button>
+                    </form>
+                    <!-- Takeaway -->
+                    <form action="{{ route('takeaway.create') }}" method="GET" class="d-inline">
+                        <button type="submit" class="btn">Takeaway</button>
+                    </form>
                 </div>
             </div>
         @endif

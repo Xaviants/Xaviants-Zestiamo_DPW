@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name'); // Nama pelanggan
             $table->string('phone'); // Nomor telepon pelanggan
             $table->string('table_number'); // Nomor meja
-            $table->enum('payment_method', ['Cash', 'Card', 'E-Wallet']); // Metode pembayaran
+            $table->enum('payment_method', ['Cash', 'Credit Card', 'E-Wallet']); // Metode pembayaran
             $table->timestamps(); 
         });
     }

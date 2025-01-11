@@ -151,10 +151,11 @@
 
         footer {
             background-color: #5E3A12;
+            color: #fff;
+            padding: 30px 0;
         }
-
-        footer .text-light {
-            color: #fff !important;
+        footer .info {
+            font-size: 14px;
         }
 
         .carousel-inner img {
@@ -208,31 +209,15 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-light text-center text-lg-start mt-4">
-        <div class="container py-4">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <h5 class="text-uppercase">Zestiamo</h5>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                    <ul class="list-unstyled mb-0">
-                        <li><a class="text-light text-decoration-none">Jl. Hang Tuah Raya No.33,</a></li>
-                        <li><a class="text-light text-decoration-none">Kebayoran Baru,</a></li>
-                        <li><a class="text-light text-decoration-none">Jakarta Selatan</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                    <ul class="list-unstyled mb-0">
-                        <li><center><a class="text-light text-decoration-none">Open Everyday,</center></a></li>
-                        <li><center><a class="text-light text-decoration-none">Monday to Sunday</center></a></li>
-                        <li><center><a class="text-light text-decoration-none">11AM Onwards.</center></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <p class="mb-0">&copy; 2024 Zestiamo</p>
-                    <p class="mb-0">All Rights Reserved.</p>
-                </div>
-            </div>
+    <footer>
+        <div class="container text-center">
+            <h3>Zestiamo</h3>
+            <p class="info">
+                Italian Cuisine<br>
+                Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan<br>
+                Open Everyday, Monday to Sunday, 11AM Onwards.<br>
+                © 2024 Zestiamo. All Rights Reserved.
+            </p>
         </div>
     </footer>
 
