@@ -89,6 +89,18 @@
             padding: 5px 10px;
             border-radius: 12px;
         }
+
+        .avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-section img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
@@ -105,6 +117,17 @@
                     <span>View Order</span>
                     <span class="badge">{{ $cartCount }}</span>
                 </a>
+
+                @if(Auth::check())
+                    <!-- Display avatar if user is logged in -->
+                    <div class="avatar-section">
+                        <img src="{{ Auth::user()->avatar ?? '/images/guest.png' }}" alt="Avatar">
+                        <span>{{ Auth::user()->name }}</span>
+                    </div>
+                @else
+                    <!-- Display login button if user is not logged in -->
+                    <a href="{{ route('login') }}" class="btn btn-light btn-sm">Log In</a>
+                @endif
             </div>
         </div>
     </header>
@@ -117,7 +140,7 @@
             </div>
         @endif
         <div class="row">
-            <!-- Loop melalui item menu -->
+            <!-- Loop through menu items -->
             @foreach($menuItems as $item)
             <div class="col-md-6 col-lg-4">
                 <div class="menu-item">
@@ -137,26 +160,20 @@
         </div>
     </div>
 
-    
     <!-- Footer -->
-<footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-        <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
-        <div style="margin-right: 50px">
-            <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
-            <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
+    <footer>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-right: 50px">
+                <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
+                <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
+            </div>
+            <div style="display: flex; gap: 70px; font-size: 16px;">
+                <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
+                <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
+                <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
+            </div>
         </div>
-    
-        <!-- Right section for address and other information -->
-        <div style="display: flex; gap: 70px; font-size: 16px;">
-            <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
-            <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
-            <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
-        </div>
-    </div>
-</footer>
-
-
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

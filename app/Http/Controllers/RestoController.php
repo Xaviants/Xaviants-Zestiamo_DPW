@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartMenu;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,22 @@ class RestoController extends Controller
     }
 
     function submitContact(Request $request) {
-        
+        // Validate the input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
+    
+        // Store the contact information in the database
+        Contact::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'message' => $validated['message'],
+        ]);
+    
+        // Optionally, you can return a success message to the user
+        return redirect()->route('contact.show')->with('success', 'Your message has been sent!');
     }
 
     function showHome() {
@@ -172,5 +188,23 @@ class RestoController extends Controller
     public function removeFromCart($id) {
         CartMenu::destroy($id);
         return redirect()->back();
+    }
+
+    public function updateNotes(Request $request, $id)
+    {
+        // Validasi input catatan
+        $validated = $request->validate([
+            'notes' => 'nullable|string|max:255', // validasi catatan
+        ]);
+
+        // Mencari item cart berdasarkan ID
+        $cartItem = CartMenu::findOrFail($id);
+
+        // Update catatan
+        $cartItem->notes = $request->input('notes');
+        $cartItem->save();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('resto.viewOrder')->with('success', 'Notes updated successfully!');
     }
 }

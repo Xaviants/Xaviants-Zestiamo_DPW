@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations - Zestiamo</title>
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -35,6 +33,17 @@
         .btn:hover {
             background-color: #74491A;
         }
+        .avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-section img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
@@ -44,7 +53,19 @@
         <div class="container d-flex justify-content-between align-items-center">
             <a href="{{ route('resto.menu') }}" class="btn btn-sm">Menu</a>
             <h1 class="h4">Reservations</h1>
-            <a href="{{ route('reservations.create') }}" class="btn btn-sm">Add New Reservation</a>
+            <div>
+                <a href="{{ route('reservations.create') }}" class="btn btn-sm">Add New Reservation</a>
+            </div>
+            @if(Auth::check())
+                <!-- Display avatar if user is logged in -->
+                <div class="avatar-section">
+                    <img src="{{ Auth::user()->avatar ?? '/images/guest.png' }}" alt="Avatar">
+                    <span>{{ Auth::user()->name }}</span>
+                </div>
+            @else
+                <!-- Display login button if user is not logged in -->
+                <a href="{{ route('login') }}" class="btn btn-sm">Log In</a>
+            @endif
         </div>
     </header>
 
@@ -82,6 +103,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
+                            <a href="{{ route('reservations.finish', $reservation->id) }}" class="btn btn-sm btn-success">Finish Reservation</a>
                         </td>
                     </tr>
                 @empty
@@ -103,7 +125,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

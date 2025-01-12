@@ -24,15 +24,41 @@
         .btn:hover {
             background-color: #74491A;
         }
-        .footer {
+        .navbar {
             background-color: #5E3A12;
-            color: #fff;
-            padding: 20px 0;
-            margin-top: 50px;
+        }
+        .navbar .avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar .avatar-section img {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
         }
     </style>
 </head>
 <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ route('resto.menu') }}" class="btn btn-sm">Menu</a>
+            <h1 class="h4">Takeaway Order</h1>
+            <div class="d-flex">
+                @if(Auth::check())
+                    <div class="navbar-nav avatar-section">
+                        <img src="{{ Auth::user()->avatar ?? '/images/guest.png' }}" alt="Avatar">
+                        <span>{{ Auth::user()->name }}</span>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-sm">Log In</a>
+                @endif
+            </div>
+        </div>
+    </nav>
+
     <!-- Form Section -->
     <div class="container py-5">
         <div class="form-container">
@@ -65,23 +91,23 @@
     </div>
 
     <!-- Footer Section -->
-    <!-- Footer -->
-<footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-        <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
-        <div style="margin-right: 50px">
-            <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
-            <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
+    <footer style="background-color: #5E3A12; color: #fff; padding: 40px 0; font-family: 'Arial', sans-serif;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Left section for 'Zestíamo' and 'Italian Cuisine' -->
+            <div style="margin-right: 50px">
+                <p style="margin: 0; font-style: italic; font-size: 12px; font-family: 'Homemade Apple', cursive;">Italian Cuisine</p>
+                <h3 style="font-family: 'Kaisei Decol', serif; margin-bottom: 5px; font-size: 26px;">Zestíamo</h3>
+            </div>
+        
+            <!-- Right section for address and other information -->
+            <div style="display: flex; gap: 70px; font-size: 16px;">
+                <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
+                <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
+                <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
+            </div>
         </div>
-    
-        <!-- Right section for address and other information -->
-        <div style="display: flex; gap: 70px; font-size: 16px;">
-            <p style="margin-bottom: 0;">Jl. Hang Tuah Raya No. 33, Kebayoran Baru, Jakarta Selatan</p>
-            <p style="margin-bottom: 0;">Open Everyday, Monday to Sunday, 11AM Onwards.</p>
-            <p style="margin-bottom: 0;">© 2024 Zestiamo. All Rights Reserved.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

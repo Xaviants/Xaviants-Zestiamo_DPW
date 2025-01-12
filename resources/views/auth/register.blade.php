@@ -93,11 +93,16 @@
             outline: none;
         }
 
+        .show-password {
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
         .text-options {
             text-align: left;
             color: white;
         }
-
     </style>
 </head>
 <body>
@@ -145,9 +150,10 @@
                     </div>
                     <div class="mb-3">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                        <p>Show Password
-                            <input type="checkbox" class="form-check-input" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
-                        </p>
+                        <div class="show-password">
+                            <input type="checkbox" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+                            <label for="showPassword">Show Password</label>
+                        </div>
                     </div>
                     
                     <!-- Updated Buttons -->

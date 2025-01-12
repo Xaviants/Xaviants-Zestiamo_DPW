@@ -97,27 +97,37 @@
             position: relative;
         }
 
-        .password-wrapper .toggle-password {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
+        .toggle-password {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: bold;
             color: #555;
+            cursor: pointer;
+            margin-top: 0.5rem;
         }
 
-        .password-wrapper .toggle-password:hover {
-            color: #333;
+        .toggle-password input {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Mengubah jenis input saat checkbox diaktifkan */
+        #show-password:checked ~ #password {
+            -webkit-text-security: none !important; /* Non-standar untuk beberapa browser */
+            text-security: none !important;         /* Non-standar untuk beberapa browser */
+        }
+
+        .show-password {
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
         .text-options {
             text-align: left;
             color: white;
         }
-
     </style>
 </head>
 <body>
@@ -159,17 +169,15 @@
                     @csrf
                     <div class="mb-3">
                         <input type="text" id="name" name="name" class="form-control" placeholder="Username">
-                        <div class="password-wrapper mt-2">
+                        <div class="mb-3">
                             <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                            <div class="form-check mt-2">
-                                <p>Show Password
-                                    <input type="checkbox" class="form-check-input" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
-                                </p>
+                            <div class="show-password">
+                                <input type="checkbox" id="showPassword" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+                                <label for="showPassword">Show Password</label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Updated Buttons -->
                     <div class="text-options mt-3">
                         <p>You don't have an account? 
                             <button type="button" class="btn-link" onclick="location.href='register'">Sign Up</button>

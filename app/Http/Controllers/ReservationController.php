@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartMenu;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -65,6 +67,20 @@ class ReservationController extends Controller
         $reservation->delete();
 
         return redirect()->route('reservations.index')->with('success', 'Reservation deleted successfully!');
+    }
+
+    public function finish($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        // Update status reservasi
+        $reservation->status = 'Completed';
+        $reservation->save();
+
+        // Mengosongkan seluruh cart
+        DB::table('cart_menus')->truncate();
+
+        return view('thank-you');
     }
 }
 

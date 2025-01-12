@@ -165,6 +165,52 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
         }
+
+        .logout-section {
+            margin-top: 20px;
+        }
+
+        .logout-section button {
+            font-size: 14px;
+        }
+
+        /* Styling for user info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-family: 'Homemade Apple', cursive;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .logout-section {
+            margin-left: 20px;
+        }
+
+        .logout-section button {
+            font-size: 14px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+
+        .logout-section button:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body class="loaded">
@@ -191,23 +237,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact.show') }}">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-light btn-sm" href="{{ route('login') }}">Log In</a>
-                    </li>
+
+                    @if(Auth::check())
+                        <li class="nav-item user-info">
+                            <!-- Menampilkan avatar bulat jika pengguna sudah login -->
+                            <a class="nav-link" href="#">
+                                <img src="{{ Auth::user()->avatar ?? '/images/guest.png' }}" alt="Avatar">
+                            </a>
+                            <h3>Benvenuto, {{ Auth::user()->name }}</h3>
+                            <div class="logout-section">
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">Logout</button>
+                                </form>
+                            </div>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <!-- Tombol login jika pengguna belum login -->
+                            <a class="btn btn-light btn-sm" href="{{ route('login') }}">Log In</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
     </nav>
-
-    @if(Auth::check())
-    <div class="text-center">
-        <h3>Benvenuto, {{ Auth::user()->name}}</h3>
-        <form action="{{ route('logout') }}" method="post">
-            @csrf
-            <button class="btn btn-danger btn-sm">Logout</button>
-        </form>
-    </div>
-    @endif
 
     <!-- Header Section -->
     <div class="header">
@@ -235,8 +289,7 @@
             </div>
         </div>
     </footer>
-        
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

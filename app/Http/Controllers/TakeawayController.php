@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartMenu;
 use Illuminate\Http\Request;
 use App\Models\Takeaway;
+use Illuminate\Support\Facades\DB;
 
 class TakeawayController extends Controller
 {
@@ -59,5 +61,19 @@ class TakeawayController extends Controller
         $takeaway->delete();
 
         return redirect()->route('takeaway.index')->with('success', 'Takeaway order successfully deleted!');
+    }
+
+    public function finish($id)
+    {
+        $takeaway = Takeaway::findOrFail($id);
+
+        // Update status takeaway
+        $takeaway->status = 'Completed';
+        $takeaway->save();
+
+        // Mengosongkan seluruh cart
+        DB::table('cart_menus')->truncate();
+
+        return view('thank-you');
     }
 }

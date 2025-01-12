@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2025 at 09:16 AM
+-- Generation Time: Jan 12, 2025 at 01:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,16 +57,24 @@ CREATE TABLE `cart_menus` (
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `cart_menus`
+-- Table structure for table `contacts`
 --
 
-INSERT INTO `cart_menus` (`id`, `name`, `price`, `quantity`, `created_at`, `updated_at`) VALUES
-(4, 'ANTONIA', 116000.00, 1, '2025-01-11 00:59:28', '2025-01-11 00:59:50'),
-(5, 'SALMON LASAGNA', 129000.00, 1, '2025-01-11 00:59:30', '2025-01-11 00:59:30');
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -144,7 +152,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2025_01_09_035632_add_quantity_to_cart_menus_table', 4),
 (7, '2025_01_09_144444_create_reservations_table', 5),
 (8, '2025_01_09_152126_rename_phone_to_phone_number_in_reservations_table', 6),
-(9, '2025_01_11_033152_create_takeaways_table', 7);
+(9, '2025_01_11_033152_create_takeaways_table', 7),
+(10, '2025_01_11_183929_add_status_to_reservations_and_takeaways', 8),
+(11, '2025_01_12_000832_add_notes_to_cart_menus', 9),
+(12, '2025_01_12_003147_create_contacts_table', 10);
 
 -- --------------------------------------------------------
 
@@ -171,7 +182,8 @@ CREATE TABLE `reservations` (
   `table_number` varchar(255) NOT NULL,
   `payment_method` enum('Cash','Credit Card','E-Wallet') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -194,7 +206,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6ENQchDUUY9lsH4SBGnzvBRIY2kvyKAw3H9F4en1', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUjFEOTNwWmcxR1FndlNwb1Z1Mk9vejJucEc3ZTRiNXRUb0Q2YVljOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736582645);
+('7jMLF5pMqz18eVooIvFzKLSmN43Kx1RSufnhM9bQ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTGQ3TjMweG1vaHFyWXBvc3FhN2oxSUE5TE0zd1d4SlI2Z2FHa2U4WiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736643105);
 
 -- --------------------------------------------------------
 
@@ -209,7 +221,8 @@ CREATE TABLE `takeaways` (
   `pickup_location` text NOT NULL,
   `payment_method` enum('Cash','Credit Card','E-Wallet') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -248,6 +261,12 @@ ALTER TABLE `cache_locks`
 -- Indexes for table `cart_menus`
 --
 ALTER TABLE `cart_menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -317,7 +336,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart_menus`
 --
 ALTER TABLE `cart_menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -335,13 +360,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `takeaways`
